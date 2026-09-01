@@ -12,25 +12,35 @@ import {
     X,
 } from 'lucide-react';
 import { useState } from 'react';
-import { dashboard } from '@/routes';
+import { dashboard, files, onlineTest } from '@/routes';
+import { useCurrentUrl } from '@/hooks/use-current-url';
 import type { BreadcrumbItem } from '@/types';
 
 const navigation = [
-    { label: 'Dashboard', icon: Home, active: true },
-    { label: 'Profil Saya', icon: UserRound },
-    { label: 'Berkas', icon: BriefcaseBusiness },
-    { label: 'Tes Online', icon: Laptop },
-    { label: 'Interview', icon: UsersRound },
-    { label: 'Pengumuman', icon: Megaphone },
+    { label: 'Dashboard', icon: Home, href: dashboard() },
+    { label: 'Berkas', icon: BriefcaseBusiness, href: files() },
+    { label: 'Tes Online', icon: Laptop, href: onlineTest() },
+    { label: 'Pengumuman', icon: Megaphone, href: '/announcement' },
 ];
 
 function PlnLogo() {
     return (
-        <div className="pln-brand" aria-label="Beasiswa PLN">
-            <span className="pln-brand-mark" aria-hidden="true">
-                <svg viewBox="0 0 48 48" role="img">
+        <div
+            className="inline-flex items-center gap-2.5 text-[22px] font-bold tracking-[-0.6px] whitespace-nowrap text-[#0763ad]"
+            aria-label="Beasiswa PLN"
+        >
+            <span
+                className="grid size-[45px] place-items-center bg-[#ffdf00]"
+                aria-hidden="true"
+            >
+                <svg
+                    className="size-[34px] fill-[#0083ca] stroke-[#e81e2b] [stroke-linecap:round] [stroke-linejoin:round]"
+                    viewBox="0 0 48 48"
+                    role="img"
+                    strokeWidth="3"
+                >
                     <path d="M28 3 12 28h11l-5 17 18-26H25z" />
-                    <path d="M8 25h29M10 31h20" />
+                    <path d="M8 25h29M10 31h20" fill="none" />
                 </svg>
             </span>
             <span>Beasiswa PLN</span>
@@ -40,23 +50,12 @@ function PlnLogo() {
 
 function SidebarArtwork() {
     return (
-        <svg
-            className="pln-sidebar-art"
-            viewBox="0 0 264 220"
+        <img
+            src="/tower.png"
+            alt=""
             aria-hidden="true"
-        >
-            <g fill="none" stroke="currentColor" strokeWidth="1.4">
-                <path d="M168 210 194 70l28 140M178 157h35M174 179h43M184 130h24M194 70l-13 18h27z" />
-                <path d="M194 92 224 84M194 92l-28-6M194 92l6 33" />
-                <path d="M25 210V153M25 153l-25 18M25 153l28 11M25 153l4-30" />
-                <path d="M89 210v-76M89 134l-37 20M89 134l36 15M89 134l5-39" />
-                <path d="M130 210v-48M130 162l-24 13M130 162l23 10M130 162l3-25" />
-            </g>
-            <g fill="currentColor" opacity=".18">
-                <path d="M0 178h26v32H0zM30 188h19v22H30zM53 170h31v40H53zM87 190h25v20H87zM116 181h24v29h-24zM224 185h18v25h-18zM244 169h20v41h-20z" />
-                <path d="M0 146c36 1 40-21 72-18 31 3 43 18 73 10 31-9 42-30 89-22 12 2 22 6 30 11v83H0z" />
-            </g>
-        </svg>
+            className="pointer-events-none absolute inset-x-0 bottom-[18px] h-[255px] w-full object-cover object-bottom opacity-70"
+        />
     );
 }
 
@@ -68,12 +67,16 @@ export default function AppLayout({
     children: React.ReactNode;
 }) {
     const [menuOpen, setMenuOpen] = useState(false);
+    const { isCurrentUrl } = useCurrentUrl();
+    const sidebarState = menuOpen
+        ? 'translate-x-0'
+        : '-translate-x-full xl:translate-x-0';
 
     return (
-        <div className="pln-shell">
+        <div className="min-h-dvh overflow-x-clip bg-[#f8fafc] font-sans text-[#0b1b3a]">
             <button
                 type="button"
-                className="pln-mobile-menu"
+                className="fixed top-3.5 left-3.5 z-10 grid size-11 place-items-center rounded-lg border border-[#d7e5f1] bg-white text-[#075fae] shadow-[0_3px_12px_rgba(11,27,58,.1)] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#1686ce]/45 xl:hidden"
                 onClick={() => setMenuOpen(true)}
                 aria-label="Buka menu navigasi"
             >
@@ -82,68 +85,73 @@ export default function AppLayout({
             {menuOpen && (
                 <button
                     type="button"
-                    className="pln-sidebar-backdrop"
+                    className="fixed inset-0 z-20 border-0 bg-[#0b1b3a]/35 xl:hidden"
                     onClick={() => setMenuOpen(false)}
                     aria-label="Tutup menu navigasi"
                 />
             )}
-            <aside className={`pln-sidebar ${menuOpen ? 'is-open' : ''}`}>
-                <div className="pln-sidebar-top">
+            <aside
+                className={
+                    'fixed inset-y-0 left-0 z-30 flex w-[264px] flex-col overflow-hidden border-r border-[#e6edf5] bg-white shadow-[14px_0_40px_rgba(11,27,58,.14)] transition-transform duration-200 xl:shadow-none ' +
+                    sidebarState
+                }
+            >
+                <div className="flex h-[100px] shrink-0 items-center justify-between px-7 pt-[27px] pb-5">
                     <PlnLogo />
                     <button
                         type="button"
-                        className="pln-sidebar-close"
+                        className="grid place-items-center border-0 bg-transparent text-[#18335d] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#1686ce]/45 xl:hidden"
                         onClick={() => setMenuOpen(false)}
                         aria-label="Tutup menu navigasi"
                     >
-                        <X />
+                        <X className="size-[22px]" />
                     </button>
                 </div>
-                <nav className="pln-navigation" aria-label="Navigasi student">
-                    {navigation.map(({ label, icon: Icon, active }) =>
-                        active ? (
+                <nav
+                    className="grid gap-2 px-3.5 py-1.5"
+                    aria-label="Navigasi student"
+                >
+                    {navigation.map(({ label, icon: Icon, href }) =>
+                        href ? (
                             <Link
                                 key={label}
-                                href={dashboard()}
-                                className="pln-nav-item is-active"
+                                href={href}
+                                className={
+                                    'flex h-[49px] w-full items-center gap-5 rounded-[9px] px-[18px] text-left text-[15px] no-underline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#1686ce]/45 ' +
+                                    (isCurrentUrl(href)
+                                        ? 'bg-gradient-to-r from-[#087ac3] to-[#0066b4] font-bold text-white shadow-[0_8px_18px_rgba(0,109,184,.19)]'
+                                        : 'font-[550] text-[#11254b] hover:bg-[#f1f8fd]')
+                                }
                                 onClick={() => setMenuOpen(false)}
                             >
-                                <Icon />
+                                <Icon className="size-[22px] stroke-[1.8]" />
                                 <span>{label}</span>
                             </Link>
                         ) : (
                             <button
                                 type="button"
                                 key={label}
-                                className="pln-nav-item"
+                                className="flex h-[49px] w-full items-center gap-5 rounded-[9px] border-0 bg-transparent px-[18px] text-left text-[15px] font-[550] text-[#11254b] hover:bg-[#f1f8fd] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#1686ce]/45"
                                 onClick={() => setMenuOpen(false)}
                             >
-                                <Icon />
+                                <Icon className="size-[22px] stroke-[1.8]" />
                                 <span>{label}</span>
                             </button>
                         ),
                     )}
                 </nav>
-                <div className="pln-sidebar-spacer" />
-                <div className="pln-help-card">
-                    <Headphones aria-hidden="true" />
-                    <div>
-                        <strong>Butuh Bantuan?</strong>
-                        <p>
-                            Hubungi kami melalui email atau{' '}
-                            <span>pusat bantuan.</span>
-                        </p>
-                    </div>
-                </div>
+                <div className="min-h-[30px] flex-1" />
                 <SidebarArtwork />
-                <div className="pln-sidebar-stripe" />
+                <div className="absolute inset-x-0 bottom-0 h-[18px] bg-[#ffd800]" />
             </aside>
-            <main className="pln-main">
-                <div className="pln-mobile-brand">
+            <main className="min-h-dvh w-full min-w-0 xl:ml-[264px] xl:w-[calc(100%-264px)]">
+                <div className="flex min-h-16 items-center justify-between border-b border-[#e6edf5] bg-white px-3.5 pt-3.5 pb-2 pl-[70px] xl:hidden">
                     <PlnLogo />
-                    <span className="pln-mobile-alert">
-                        <Bell />
-                        <b>3</b>
+                    <span className="relative text-[#1e365c]">
+                        <Bell className="size-6" />
+                        <b className="absolute -top-1.5 -right-2 grid size-[17px] place-items-center rounded-full bg-[#f0444d] text-[10px] text-white">
+                            3
+                        </b>
                     </span>
                 </div>
                 {children}

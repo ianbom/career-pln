@@ -192,7 +192,9 @@ function AppHeader() {
                 </h1>
                 <p className="m-0 text-lg text-[#3d5074] max-sm:text-[15px]">
                     Selamat datang,{' '}
-                    <strong className="text-[#096bc2]">Andi Pratama</strong>{' '}
+                    <strong className="font-heading text-[#096bc2]">
+                        Andi Pratama
+                    </strong>{' '}
                     <span aria-hidden="true">👋</span>
                 </p>
             </div>
@@ -215,7 +217,9 @@ function AppHeader() {
                     AP
                 </span>
                 <span className="grid min-w-[104px] gap-[3px]">
-                    <strong className="text-base">Andi Pratama</strong>
+                    <strong className="font-heading text-base">
+                        Andi Pratama
+                    </strong>
                     <small className="text-[13px] text-[#61708b]">
                         Mahasiswa
                     </small>
@@ -244,7 +248,7 @@ export default function Dashboard() {
                         <span className="mb-[9px] block text-sm">
                             Tahap Saat Ini:
                         </span>
-                        <strong className="inline-flex items-center gap-3 rounded-[22px] bg-white px-[21px] py-3 text-[22px] leading-none text-[#0062b8] shadow-[0_4px_8px_rgba(0,45,94,.16)]">
+                        <strong className="font-heading inline-flex items-center gap-3 rounded-[22px] bg-white px-[21px] py-3 text-[22px] leading-none text-[#0062b8] shadow-[0_4px_8px_rgba(0,45,94,.16)]">
                             <FileCheck2 className="w-[25px]" />
                             Seleksi Berkas
                         </strong>

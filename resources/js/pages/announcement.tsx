@@ -19,11 +19,7 @@ const participantColumns = [
     [
         ['Nama', 'Andi Pratama', UserRound],
         ['Nomor Pendaftaran', 'PLN-BEA-2026-00128', FileText],
-        [
-            'Asal Institusi',
-            'Politeknik Elektronika Negeri Surabaya',
-            Building2,
-        ],
+        ['Asal Institusi', 'Politeknik Elektronika Negeri Surabaya', Building2],
     ],
     [
         ['Program Studi', 'Teknik Informatika', GraduationCap],
@@ -44,7 +40,7 @@ function PageHeader() {
     return (
         <header className="mb-[19px] flex items-start justify-between">
             <div>
-                <h1 className="m-0 text-[24px] font-extrabold leading-[1.2] tracking-[-.5px] text-[#0b1b3a]">
+                <h1 className="m-0 text-[24px] leading-[1.2] font-extrabold tracking-[-.5px] text-[#0b1b3a]">
                     Pengumuman Seleksi
                 </h1>
                 <p className="mt-1 text-[15px] text-[#344563]">
@@ -56,7 +52,7 @@ function PageHeader() {
                     AP
                 </span>
                 <span className="grid min-w-[105px] gap-[3px]">
-                    <strong className="text-base text-[#0b1b3a]">
+                    <strong className="font-heading text-base text-[#0b1b3a]">
                         Andi Pratama
                     </strong>
                     <small className="text-[13px] text-[#61708b]">
@@ -86,7 +82,7 @@ function SelectionBadge() {
             <span className="absolute bottom-[13px] left-[25px] rotate-[22deg] text-[48px] leading-none text-[#167bd0]">
                 ❯
             </span>
-            <span className="absolute right-[22px] bottom-[13px] -rotate-[22deg] -scale-x-100 text-[48px] leading-none text-[#167bd0]">
+            <span className="absolute right-[22px] bottom-[13px] -scale-x-100 -rotate-[22deg] text-[48px] leading-none text-[#167bd0]">
                 ❯
             </span>
         </div>
@@ -103,13 +99,15 @@ function ResultHero() {
                 <p className="m-0 text-[14px] font-bold text-[#0069bf]">
                     PENGUMUMAN HASIL SELEKSI
                 </p>
-                <h2 className="mt-[10px] text-[25px] font-extrabold leading-none text-[#0b1b3a]">
+                <h2 className="mt-[10px] text-[25px] leading-none font-extrabold text-[#0b1b3a]">
                     Selamat, Andi Pratama!
                 </h2>
                 <p className="mt-[17px] text-[19px] font-semibold text-[#0b1b3a]">
                     Anda dinyatakan{' '}
-                    <strong className="text-[#0874c8]">LOLOS</strong> sebagai
-                    penerima Beasiswa PLN 2026.
+                    <strong className="font-heading text-[#0874c8]">
+                        LOLOS
+                    </strong>{' '}
+                    sebagai penerima Beasiswa PLN 2026.
                 </p>
                 <p className="mt-[18px] max-w-[675px] text-[14px] leading-[1.55] text-[#344563]">
                     Terima kasih telah mengikuti seluruh rangkaian proses
@@ -119,7 +117,7 @@ function ResultHero() {
                 </p>
             </div>
             <div className="relative z-[1] mt-5 flex justify-center md:mt-0">
-                <span className="inline-flex items-center gap-4 rounded-full bg-[#0874c8] px-[27px] py-[15px] text-[17px] font-bold text-white shadow-[0_5px_12px_rgba(0,91,159,.18)]">
+                <span className="font-heading inline-flex items-center gap-4 rounded-full bg-[#0874c8] px-[27px] py-[15px] text-[17px] font-bold text-white shadow-[0_5px_12px_rgba(0,91,159,.18)]">
                     <span className="grid size-[22px] place-items-center rounded-full bg-white text-[#0874c8]">
                         <Check className="size-4 stroke-[3]" />
                     </span>
@@ -142,9 +140,7 @@ function ParticipantInfo() {
                 {participantColumns.map((column, columnIndex) => (
                     <div
                         className={
-                            columnIndex === 1
-                                ? 'md:pl-[38px]'
-                                : 'md:pr-[27px]'
+                            columnIndex === 1 ? 'md:pl-[38px]' : 'md:pr-[27px]'
                         }
                         key={columnIndex}
                     >

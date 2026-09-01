@@ -26,7 +26,7 @@ const navigation = [
 function PlnLogo() {
     return (
         <div
-            className="inline-flex items-center gap-2.5 text-[22px] font-bold tracking-[-0.6px] whitespace-nowrap text-[#0763ad]"
+            className="font-heading inline-flex items-center gap-2.5 text-[22px] font-bold tracking-[-0.6px] whitespace-nowrap text-[#0763ad]"
             aria-label="Beasiswa PLN"
         >
             <span
